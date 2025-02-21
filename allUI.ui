@@ -301,7 +301,7 @@ border : 2px solid #454674;
              </item>
              <item>
               <property name="text">
-               <string>Guassian</string>
+               <string>Gaussian</string>
               </property>
              </item>
              <item>
@@ -901,7 +901,7 @@ color:white;
              <property name="maximumSize">
               <size>
                <width>650</width>
-               <height>16777215</height>
+               <height>750</height>
               </size>
              </property>
              <property name="styleSheet">
@@ -915,22 +915,18 @@ border : 2px solid #5A5D7A; </string>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <widget class="QLabel" name="orginal_image">
-              <property name="geometry">
-               <rect>
-                <x>50</x>
-                <y>10</y>
-                <width>381</width>
-                <height>521</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">border : 2px solid #454674; </string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
+             <layout class="QGridLayout" name="gridLayout_4">
+              <item row="0" column="0">
+               <widget class="QLabel" name="orginal_image">
+                <property name="styleSheet">
+                 <string notr="true">border : 2px solid #454674; </string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
            <item>
@@ -944,7 +940,7 @@ border : 2px solid #5A5D7A; </string>
              <property name="maximumSize">
               <size>
                <width>650</width>
-               <height>16777215</height>
+               <height>750</height>
               </size>
              </property>
              <property name="styleSheet">
@@ -958,22 +954,18 @@ border : 2px solid #5A5D7A; </string>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <widget class="QLabel" name="filtered_image">
-              <property name="geometry">
-               <rect>
-                <x>50</x>
-                <y>10</y>
-                <width>381</width>
-                <height>521</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">border : 2px solid #454674; </string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
+             <layout class="QGridLayout" name="gridLayout_5">
+              <item row="0" column="0">
+               <widget class="QLabel" name="filtered_image">
+                <property name="styleSheet">
+                 <string notr="true">border : 2px solid #454674; </string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
           </layout>
