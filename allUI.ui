@@ -350,12 +350,12 @@ border : 2px solid #454674; </string>
              </property>
              <item>
               <property name="text">
-               <string>Average</string>
+               <string>Gaussian</string>
               </property>
              </item>
              <item>
               <property name="text">
-               <string>Gaussian</string>
+               <string>Average</string>
               </property>
              </item>
              <item>
@@ -507,17 +507,11 @@ border : 2px solid #454674; </string>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <widget class="QSlider" name="kernel_slider">
-              <property name="geometry">
-               <rect>
-                <x>10</x>
-                <y>5</y>
-                <width>211</width>
-                <height>22</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QSlider::groove:horizontal {
+             <layout class="QHBoxLayout" name="horizontalLayout_5">
+              <item>
+               <widget class="QSlider" name="kernel_slider">
+                <property name="styleSheet">
+                 <string notr="true">QSlider::groove:horizontal {
     border: 1px solid #999999;
     height: 2px;
 }
@@ -543,35 +537,41 @@ QSlider::handle:horizontal:hover {
     border-color: #007ad9;
 }
 </string>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-             <widget class="QLabel" name="kernel_value">
-              <property name="geometry">
-               <rect>
-                <x>260</x>
-                <y>0</y>
-                <width>55</width>
-                <height>30</height>
-               </rect>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: #282554;
+                </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="maximum">
+                 <number>9</number>
+                </property>
+                <property name="value">
+                 <number>3</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
+               <widget class="QLabel" name="kernel_label">
+                <property name="minimumSize">
+                 <size>
+                  <width>30</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: #282554;
 border-radius: 5px;
-color:white;</string>
-              </property>
-              <property name="text">
-               <string>  value</string>
-              </property>
-             </widget>
+color:white;
+padding-left:5px;</string>
+                </property>
+                <property name="text">
+                 <string>3</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
            <item>
@@ -602,17 +602,11 @@ border : 2px solid #454674; </string>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <widget class="QSlider" name="sigma_slider">
-              <property name="geometry">
-               <rect>
-                <x>10</x>
-                <y>5</y>
-                <width>211</width>
-                <height>22</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QSlider::groove:horizontal {
+             <layout class="QHBoxLayout" name="horizontalLayout_6">
+              <item>
+               <widget class="QSlider" name="sigma_slider">
+                <property name="styleSheet">
+                 <string notr="true">QSlider::groove:horizontal {
     border: 1px solid #999999;
     height: 2px;
 }
@@ -638,35 +632,35 @@ QSlider::handle:horizontal:hover {
     border-color: #007ad9;
 }
 </string>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-             <widget class="QLabel" name="sigma_value">
-              <property name="geometry">
-               <rect>
-                <x>260</x>
-                <y>0</y>
-                <width>55</width>
-                <height>30</height>
-               </rect>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: #282554;
+                </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="sigma_label">
+                <property name="minimumSize">
+                 <size>
+                  <width>30</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: #282554;
 border-radius: 5px;
-color:white;</string>
-              </property>
-              <property name="text">
-               <string>  value</string>
-              </property>
-             </widget>
+color:white;
+padding-left:5px;</string>
+                </property>
+                <property name="text">
+                 <string>1</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
            <item>
@@ -697,17 +691,11 @@ border : 2px solid #454674; </string>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <widget class="QSlider" name="mean_slider">
-              <property name="geometry">
-               <rect>
-                <x>10</x>
-                <y>5</y>
-                <width>211</width>
-                <height>22</height>
-               </rect>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QSlider::groove:horizontal {
+             <layout class="QHBoxLayout" name="horizontalLayout_7">
+              <item>
+               <widget class="QSlider" name="mean_slider">
+                <property name="styleSheet">
+                 <string notr="true">QSlider::groove:horizontal {
     border: 1px solid #999999;
     height: 2px;
 }
@@ -733,44 +721,41 @@ QSlider::handle:horizontal:hover {
     border-color: #007ad9;
 }
 </string>
-              </property>
-              <property name="minimum">
-               <number>0</number>
-              </property>
-              <property name="value">
-               <number>0</number>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="tickPosition">
-               <enum>QSlider::NoTicks</enum>
-              </property>
-             </widget>
-             <widget class="QLabel" name="mean_value">
-              <property name="geometry">
-               <rect>
-                <x>260</x>
-                <y>0</y>
-                <width>55</width>
-                <height>30</height>
-               </rect>
-              </property>
-              <property name="minimumSize">
-               <size>
-                <width>0</width>
-                <height>30</height>
-               </size>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: #282554;
+                </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="tickPosition">
+                 <enum>QSlider::NoTicks</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="mean_label">
+                <property name="minimumSize">
+                 <size>
+                  <width>30</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: #282554;
 border-radius: 5px;
-color:white;</string>
-              </property>
-              <property name="text">
-               <string>  value</string>
-              </property>
-             </widget>
+color:white;
+padding-left:5px;</string>
+                </property>
+                <property name="text">
+                 <string>1</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
            <item>

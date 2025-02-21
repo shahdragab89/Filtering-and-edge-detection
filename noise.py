@@ -51,8 +51,8 @@ class NoiseProcessor:
             noisy_image = NoiseProcessor.add_uniform_noise(image)
 
         # Convert to QImage
-        height, width, channel = noisy_image.shape
-        bytes_per_line = 3 * width
-        noisy_image = QImage(noisy_image.data, width, height, bytes_per_line, QImage.Format_RGB888)
+        height, width = noisy_image.shape
+        bytes_per_line = width
+        noisy_image = QImage(noisy_image.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
 
         return noisy_image
