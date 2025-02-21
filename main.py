@@ -25,18 +25,19 @@ class MainApp(QtWidgets.QMainWindow, ui):
         # Initializing Buttons 
         self.filterUpload_button.clicked.connect(lambda: self.uploadImage(1))
         self.filterDownload_button.clicked.connect(self.downloadImage)
+        self.reset_button.clicked.connect(lambda: self.reset(1))
 
         # Initializing ComboBoxes
-        self.noise_comboBox.currentIndexChanged.connect(self.applyNoise)
-        # self.filter_comboBox.currentIndexChanged.connect()
+        self.noise_comboBox.currentIndexChanged.connect(self.handleNoise)
+        self.filter_comboBox.currentIndexChanged.connect(self.handleFilter)
 
         # Initializing Sliders
-        # self.kernel_slider.sliderReleased.connect()
-        # self.sigma_slider.sliderReleased.connect()
-        # self.mean_slider.sliderRelease.connect()
+        self.kernel_slider.sliderReleased.connect(self.handleFilter)
+        self.sigma_slider.sliderReleased.connect(self.handleFilter)
+        self.mean_slider.sliderReleased.connect(self.handleFilter)
 
         # Allow scaling of image
-        self.orginal_image.setScaledContents(True)  
+        self.original_image.setScaledContents(True)  
         self.filtered_image.setScaledContents(True)
 
 
@@ -56,21 +57,21 @@ class MainApp(QtWidgets.QMainWindow, ui):
 
             q_image = QImage(self.image.data, width, height, bytes_per_line, QImage.Format_RGB888)
 
-            self.orginal_image.setPixmap(QPixmap.fromImage(q_image))
-            self.orginal_image.setScaledContents(True)
+            self.original_image.setPixmap(QPixmap.fromImage(q_image))
+            self.original_image.setScaledContents(True)
 
             if value == 1:
                 # Convert QImage to QPixmap and set it to the QLabel
-                self.orginal_image.setPixmap(QPixmap.fromImage(q_image))
-                self.orginal_image.setScaledContents(True)  # Scale the image to fit QLabel
+                self.original_image.setPixmap(QPixmap.fromImage(q_image))
+                self.original_image.setScaledContents(True)  # Scale the image to fit QLabel
                 self.filtered_image.setPixmap(QPixmap.fromImage(q_image))
                 self.filtered_image.setScaledContents(True)  
             elif value == 2:
                 self.rgbOriginal_image.setPixmap(QPixmap.fromImage(q_image))
                 self.rgbOriginal_image.setScaledContents(True)  
             elif value == 3:
-                self.original_image.setPixmap(QPixmap.fromImage(q_image))
-                self.original_image.setScaledContents(True)  
+                self.histogramOriginal_image.setPixmap(QPixmap.fromImage(q_image))
+                self.histogramOriginal_image.setScaledContents(True)  
             elif value == 4:
                 self.image1.setPixmap(QPixmap.fromImage(q_image))
                 self.image1.setScaledContents(True)  
@@ -82,10 +83,21 @@ class MainApp(QtWidgets.QMainWindow, ui):
     def downloadImage(self):
         print("download")
 
-    def applyNoise(self):
+    def handleNoise(self):
         noisyImage = NoiseProcessor.applyNoiseAndDisplay(self.noise_comboBox.currentText(), self.image)
         self.filtered_image.setPixmap(QPixmap.fromImage(noisyImage))
         self.filtered_image.setScaledContents(True)  
+    
+    def handleFilter(self):
+        pass
+
+    def reset(self, value):
+        self.value = value
+        if self.value == 1:
+            self.image = None
+            self.original_image.clear() 
+            self.filtered_image.clear() 
+        
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
