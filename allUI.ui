@@ -59,7 +59,7 @@ QTabWidget::pane {
 </string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -160,7 +160,7 @@ border : 2px solid #454674; </string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout">
               <item>
-               <widget class="QPushButton" name="pushButton">
+               <widget class="QPushButton" name="filterUpload_button">
                 <property name="minimumSize">
                  <size>
                   <width>100</width>
@@ -193,7 +193,7 @@ color:white;
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_2">
+               <widget class="QPushButton" name="filterDownload_button">
                 <property name="minimumSize">
                  <size>
                   <width>100</width>
@@ -274,7 +274,7 @@ border : 2px solid #454674; </string>
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="comboBox">
+            <widget class="QComboBox" name="noise_comboBox">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -329,7 +329,7 @@ border : 2px solid #454674; </string>
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="comboBox_2">
+            <widget class="QComboBox" name="filter_comboBox">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -383,7 +383,7 @@ border : 2px solid #454674; </string>
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="comboBox_3">
+            <widget class="QComboBox" name="edges_comboBox">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -442,7 +442,7 @@ border : 2px solid #454674; </string>
             </widget>
            </item>
            <item>
-            <widget class="QComboBox" name="comboBox_4">
+            <widget class="QComboBox" name="freqFilter_comboBox">
              <property name="minimumSize">
               <size>
                <width>0</width>
@@ -507,7 +507,7 @@ border : 2px solid #454674; </string>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <widget class="QSlider" name="horizontalSlider">
+             <widget class="QSlider" name="kernel_slider">
               <property name="geometry">
                <rect>
                 <x>10</x>
@@ -548,7 +548,7 @@ QSlider::handle:horizontal:hover {
                <enum>Qt::Horizontal</enum>
               </property>
              </widget>
-             <widget class="QLabel" name="label_9">
+             <widget class="QLabel" name="kernel_value">
               <property name="geometry">
                <rect>
                 <x>260</x>
@@ -602,7 +602,7 @@ border : 2px solid #454674; </string>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <widget class="QSlider" name="horizontalSlider_2">
+             <widget class="QSlider" name="sigma_slider">
               <property name="geometry">
                <rect>
                 <x>10</x>
@@ -643,7 +643,7 @@ QSlider::handle:horizontal:hover {
                <enum>Qt::Horizontal</enum>
               </property>
              </widget>
-             <widget class="QLabel" name="label_20">
+             <widget class="QLabel" name="sigma_value">
               <property name="geometry">
                <rect>
                 <x>260</x>
@@ -697,7 +697,7 @@ border : 2px solid #454674; </string>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <widget class="QSlider" name="horizontalSlider_3">
+             <widget class="QSlider" name="mean_slider">
               <property name="geometry">
                <rect>
                 <x>10</x>
@@ -747,7 +747,7 @@ QSlider::handle:horizontal:hover {
                <enum>QSlider::NoTicks</enum>
               </property>
              </widget>
-             <widget class="QLabel" name="label_22">
+             <widget class="QLabel" name="mean_value">
               <property name="geometry">
                <rect>
                 <x>260</x>
@@ -800,7 +800,7 @@ border : 2px solid #454674;
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_4">
               <item>
-               <widget class="QPushButton" name="pushButton_5">
+               <widget class="QPushButton" name="apply_button">
                 <property name="minimumSize">
                  <size>
                   <width>100</width>
@@ -833,7 +833,7 @@ color:white;
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_6">
+               <widget class="QPushButton" name="reset_button">
                 <property name="minimumSize">
                  <size>
                   <width>100</width>
@@ -915,10 +915,10 @@ border : 2px solid #5A5D7A; </string>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <widget class="QLabel" name="label">
+             <widget class="QLabel" name="orginal_image">
               <property name="geometry">
                <rect>
-                <x>10</x>
+                <x>50</x>
                 <y>10</y>
                 <width>381</width>
                 <height>521</height>
@@ -958,10 +958,10 @@ border : 2px solid #5A5D7A; </string>
              <property name="frameShadow">
               <enum>QFrame::Raised</enum>
              </property>
-             <widget class="QLabel" name="label_2">
+             <widget class="QLabel" name="filtered_image">
               <property name="geometry">
                <rect>
-                <x>10</x>
+                <x>50</x>
                 <y>10</y>
                 <width>381</width>
                 <height>521</height>
@@ -1082,7 +1082,7 @@ border : 2px solid #454674; </string>
              </property>
              <layout class="QHBoxLayout" name="horizontalLayout_2">
               <item>
-               <widget class="QPushButton" name="pushButton_3">
+               <widget class="QPushButton" name="rgbUpload_button">
                 <property name="minimumSize">
                  <size>
                   <width>100</width>
@@ -1115,7 +1115,7 @@ color:white;
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_4">
+               <widget class="QPushButton" name="rgbDownload_button">
                 <property name="minimumSize">
                  <size>
                   <width>100</width>
@@ -1166,7 +1166,7 @@ border : 2px solid #5A5D7A; </string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_10">
            <item>
-            <widget class="QLabel" name="label_13">
+            <widget class="QLabel" name="rgbOriginal_image">
              <property name="styleSheet">
               <string notr="true">border : 2px solid #454674; </string>
              </property>
@@ -1217,7 +1217,7 @@ border : 2px solid #5A5D7A; </string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_12">
            <item>
-            <widget class="QLabel" name="label_17">
+            <widget class="QLabel" name="rgbGray_image">
              <property name="styleSheet">
               <string notr="true">border : 2px solid #454674; </string>
              </property>
@@ -1268,7 +1268,7 @@ border : 2px solid #5A5D7A; </string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_7">
            <item>
-            <widget class="QLabel" name="label_10">
+            <widget class="QLabel" name="rgbCDF_image">
              <property name="styleSheet">
               <string notr="true">border : 2px solid #454674; </string>
              </property>
@@ -1319,7 +1319,7 @@ border : 2px solid #5A5D7A; </string>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout_11">
            <item>
-            <widget class="QLabel" name="label_15">
+            <widget class="QLabel" name="rgbPDF_image">
              <property name="styleSheet">
               <string notr="true">border : 2px solid #454674; </string>
              </property>
@@ -1462,7 +1462,7 @@ border : 2px solid #454674; </string>
                <number>7</number>
               </property>
               <item>
-               <widget class="QPushButton" name="upload_button">
+               <widget class="QPushButton" name="upload_button_2">
                 <property name="minimumSize">
                  <size>
                   <width>65</width>
