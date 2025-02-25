@@ -11,6 +11,8 @@ import os
 import matplotlib.pyplot as plt
 from noise import NoiseProcessor
 from filters import FilterProcessor
+from PIL import Image, ImageQt
+
 
 
 # Load the UI file
@@ -21,6 +23,8 @@ class MainApp(QtWidgets.QMainWindow, ui):
         super(MainApp, self).__init__()
         self.setupUi(self)
 
+        self.image = None
+
         # Initializing Buttons 
         self.filterUpload_button.clicked.connect(lambda: self.uploadImage(1))
         self.filterDownload_button.clicked.connect(self.downloadImage)
@@ -28,13 +32,13 @@ class MainApp(QtWidgets.QMainWindow, ui):
         self.reset_button.clicked.connect(lambda: self.reset(1))
 
         # Initializing ComboBoxes
-        self.noise_comboBox.currentIndexChanged.connect(self.handleNoise)
-        self.filter_comboBox.currentIndexChanged.connect(self.handleFilter)
+        self.noise_comboBox.activated.connect(self.handleNoise)
+        self.filter_comboBox.activated.connect(self.handleFilter)
 
         # Initializing Sliders
-        self.kernel_slider.sliderReleased.connect(lambda: self.handleFilter("kernel"))
-        self.sigma_slider.sliderReleased.connect(lambda: self.handleFilter("sigma"))
-        self.mean_slider.sliderReleased.connect(lambda: self.handleFilter("mean"))
+        self.kernel_slider.sliderReleased.connect(self.handleFilter)
+        self.sigma_slider.sliderReleased.connect(self.handleFilter)
+        self.mean_slider.sliderReleased.connect(self.handleNoise)
 
         # Allow scaling of image
         self.original_image.setScaledContents(True)  
@@ -82,34 +86,68 @@ class MainApp(QtWidgets.QMainWindow, ui):
         print("download")
 
     def handleNoise(self):
-        noisyImage = NoiseProcessor.applyNoiseAndDisplay(self.noise_comboBox.currentText(), self.image)
-        self.noisyImage = noisyImage
-        self.filtered_image.setPixmap(QPixmap.fromImage(noisyImage))
-        self.filtered_image.setScaledContents(True)  
-    
-    def handleFilter(self, updatedSlider):
-        self.updatedSlider = updatedSlider
-        match self.updatedSlider:
-            case "kernel":
-                self.kernel_value = self.kernel_slider.value()
-                self.kernel_label.setText(str(self.kernel_value))
-            case "sigma":
-                self.sigma_value = self.sigma_slider.value()
-                self.sigma_label.setText(str(self.sigma_value))
-            case "mean":
-                self.mean_value = self.mean_slider.value()
-                self.mean_label.setText(str(self.mean_value))
-        self.sliderValues = [self.kernel_slider.value(), self.sigma_slider.value(), self.mean_slider.value()]
-        
-        filteredImage = FilterProcessor.applyFilterAndDisplay(self.filter_comboBox.currentText(), self.sliderValues, self.image)
-        self.filteredImage = filteredImage
-        self.filtered_image.setPixmap(QPixmap.fromImage(filteredImage))
-        self.filtered_image.setScaledContents(True) 
+        try:
+            if self.image is None:
+                self.mean_slider.setValue(1)
+                raise ValueError("No image loaded. Please upload an image before applying noise.")
+            # Take the mean value for gaussian noise
+            self.mean_value = self.handle_kernelSlider()[2]
 
+            noisyImage = NoiseProcessor.applyNoiseAndDisplay(self.noise_comboBox.currentText(), self.image, self.mean_value)
+            self.noisyImage = noisyImage
+
+            # Show the noisy image 
+            self.filtered_image.setPixmap(QPixmap.fromImage(noisyImage))
+            self.filtered_image.setScaledContents(True)  
+
+        except ValueError as ve:
+            print(f" Error: {ve}")
+
+    
+    def handleFilter(self):
+        try:
+            if self.image is None:
+                self.kernel_slider.setValue(3)
+                self.sigma_slider.setValue(1)
+                raise ValueError("No image loaded. Please upload an image before applying noise.")
+
+            self.sliderValues = self.handle_kernelSlider()
+
+            # Apply filter to noisy image
+            if hasattr(NoiseProcessor, 'last_noisy_image') and NoiseProcessor.last_noisy_image is not None:
+                noisyImage = NoiseProcessor.last_noisy_image  
+            else:
+                noisyImage = self.image 
+            
+            filteredImage = FilterProcessor.applyFilterAndDisplay(noisyImage, self.filter_comboBox.currentText(), self.sliderValues)
+            self.filteredImage = filteredImage
+            self.filtered_image.setPixmap(QPixmap.fromImage(filteredImage))
+            self.filtered_image.setScaledContents(True) 
+
+        except ValueError as ve:
+            print(f" Error: {ve}")
+
+    def handle_kernelSlider(self):
+    
+        kernel_allowedValues = [1,3,5,7,9,11,13]
+        self.kernel_value = kernel_allowedValues[self.kernel_slider.value()]
+        self.kernel_label.setText(str(self.kernel_value))
+        self.sigma_value = self.sigma_slider.value()
+        self.sigma_label.setText(str(self.sigma_value))
+        self.mean_value = self.mean_slider.value()
+        self.mean_label.setText(str(self.mean_value))
+
+        return [self.kernel_value, self.sigma_value, self.mean_value]
 
     def apply(self):
-        self.original_image.setPixmap(QPixmap.fromImage(self.noisyImage))
-        self.original_image.setScaledContents(True)  
+        try:
+            if self.image is None:
+                raise ValueError("No image loaded. Please upload an image before applying noise.")
+            # Set the noisy image in the original_image label
+            self.original_image.setPixmap(QPixmap.fromImage(self.noisyImage))
+            self.original_image.setScaledContents(True)  
+        except ValueError as ve:
+            print(f" Error: {ve}")
         
 
     def reset(self, value):
