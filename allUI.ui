@@ -59,7 +59,7 @@ QTabWidget::pane {
 </string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -245,6 +245,7 @@ color:white;
           </property>
           <property name="styleSheet">
            <string notr="true">background-color:#454674;
+font: 9pt &quot;MS Shell Dlg 2&quot;;
 border-radius:8px;
 border : 2px solid #5A5D7A; </string>
           </property>
@@ -259,9 +260,11 @@ border : 2px solid #5A5D7A; </string>
             <widget class="QLabel" name="label_4">
              <property name="font">
               <font>
-               <pointsize>8</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
+               <family>MS Shell Dlg 2</family>
+               <pointsize>9</pointsize>
+               <weight>50</weight>
+               <italic>false</italic>
+               <bold>false</bold>
               </font>
              </property>
              <property name="styleSheet">
@@ -315,8 +318,11 @@ border : 2px solid #454674;
             <widget class="QLabel" name="label_5">
              <property name="font">
               <font>
-               <weight>75</weight>
-               <bold>true</bold>
+               <family>MS Shell Dlg 2</family>
+               <pointsize>9</pointsize>
+               <weight>50</weight>
+               <italic>false</italic>
+               <bold>false</bold>
               </font>
              </property>
              <property name="styleSheet">
@@ -369,8 +375,11 @@ border : 2px solid #454674; </string>
             <widget class="QLabel" name="label_6">
              <property name="font">
               <font>
-               <weight>75</weight>
-               <bold>true</bold>
+               <family>MS Shell Dlg 2</family>
+               <pointsize>9</pointsize>
+               <weight>50</weight>
+               <italic>false</italic>
+               <bold>false</bold>
               </font>
              </property>
              <property name="styleSheet">
@@ -425,66 +434,14 @@ border : 2px solid #454674; </string>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_7">
-             <property name="font">
-              <font>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color:white;
-border : 2px solid #454674; </string>
-             </property>
-             <property name="text">
-              <string>Frequency Domain Filters</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="freqFilter_comboBox">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>300</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color: #282554;
-border-radius: 5px;
-color:white;
-border : 2px solid #454674; 
-</string>
-             </property>
-             <item>
-              <property name="text">
-               <string>Ideal Low</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Ideal High</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Gaussian</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item>
             <widget class="QLabel" name="label_8">
              <property name="font">
               <font>
-               <weight>75</weight>
-               <bold>true</bold>
+               <family>MS Shell Dlg 2</family>
+               <pointsize>9</pointsize>
+               <weight>50</weight>
+               <italic>false</italic>
+               <bold>false</bold>
               </font>
              </property>
              <property name="styleSheet">
@@ -584,8 +541,11 @@ padding-left:5px;</string>
             <widget class="QLabel" name="label_19">
              <property name="font">
               <font>
-               <weight>75</weight>
-               <bold>true</bold>
+               <family>MS Shell Dlg 2</family>
+               <pointsize>9</pointsize>
+               <weight>50</weight>
+               <italic>false</italic>
+               <bold>false</bold>
               </font>
              </property>
              <property name="styleSheet">
@@ -679,8 +639,11 @@ padding-left:5px;</string>
             <widget class="QLabel" name="label_21">
              <property name="font">
               <font>
-               <weight>75</weight>
-               <bold>true</bold>
+               <family>MS Shell Dlg 2</family>
+               <pointsize>9</pointsize>
+               <weight>50</weight>
+               <italic>false</italic>
+               <bold>false</bold>
               </font>
              </property>
              <property name="styleSheet">
@@ -771,6 +734,143 @@ padding-left:5px;</string>
             </widget>
            </item>
            <item>
+            <widget class="QLabel" name="label_7">
+             <property name="font">
+              <font>
+               <family>MS Shell Dlg 2</family>
+               <pointsize>9</pointsize>
+               <weight>50</weight>
+               <italic>false</italic>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color:white;
+border : 2px solid #454674; </string>
+             </property>
+             <property name="text">
+              <string>Frequency Domain Filters</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="freqFilter_comboBox">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>25</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>300</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color: #282554;
+border-radius: 5px;
+color:white;
+border : 2px solid #454674; 
+</string>
+             </property>
+             <item>
+              <property name="text">
+               <string>Ideal Low</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Ideal High</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Gaussian</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_22">
+             <property name="font">
+              <font>
+               <family>MS Shell Dlg 2</family>
+               <pointsize>9</pointsize>
+               <weight>50</weight>
+               <italic>false</italic>
+               <bold>false</bold>
+              </font>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">color:white;
+border : 2px solid #454674; </string>
+             </property>
+             <property name="text">
+              <string>radius</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="frame_19">
+             <property name="styleSheet">
+              <string notr="true">border : 2px solid #454674; </string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout_8">
+              <item>
+               <widget class="QSlider" name="radius_slider_2">
+                <property name="styleSheet">
+                 <string notr="true">QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    height: 2px;
+}
+
+QSlider::handle:horizontal {
+    background: #0388E3;
+    width: 10px;
+    margin: -5px -1px;
+    border-radius: 5px;
+    border: 1px solid #0388E3;
+}
+
+QSlider::add-page:horizontal {
+    background: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 0, stop: 0 #B1B1B1, stop: 1 #c4c4c4);
+}
+
+QSlider::sub-page:horizontal {
+    background: #0388E3;
+}
+
+QSlider::handle:horizontal:hover {
+    background: #007ad9;
+    border-color: #007ad9;
+}
+</string>
+                </property>
+                <property name="minimum">
+                 <number>1</number>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="tickPosition">
+                 <enum>QSlider::NoTicks</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
             <widget class="QFrame" name="frame_15">
              <property name="minimumSize">
               <size>
@@ -812,9 +912,11 @@ border : 2px solid #454674;
                 </property>
                 <property name="font">
                  <font>
-                  <pointsize>8</pointsize>
-                  <weight>75</weight>
-                  <bold>true</bold>
+                  <family>MS Shell Dlg 2</family>
+                  <pointsize>9</pointsize>
+                  <weight>50</weight>
+                  <italic>false</italic>
+                  <bold>false</bold>
                  </font>
                 </property>
                 <property name="styleSheet">
@@ -845,8 +947,11 @@ color:white;
                 </property>
                 <property name="font">
                  <font>
-                  <weight>75</weight>
-                  <bold>true</bold>
+                  <family>MS Shell Dlg 2</family>
+                  <pointsize>9</pointsize>
+                  <weight>50</weight>
+                  <italic>false</italic>
+                  <bold>false</bold>
                  </font>
                 </property>
                 <property name="styleSheet">
@@ -1944,6 +2049,7 @@ border : 2px solid #454674; </string>
             <widget class="QFrame" name="frame_54">
              <property name="styleSheet">
               <string notr="true">background-color:#454674;
+font: 9pt &quot;MS Shell Dlg 2&quot;;
 border-radius:8px;
 border : 2px solid #5A5D7A; </string>
              </property>
@@ -2001,9 +2107,11 @@ border : 2px solid #454674; </string>
                    </property>
                    <property name="font">
                     <font>
-                     <pointsize>8</pointsize>
-                     <weight>75</weight>
-                     <bold>true</bold>
+                     <family>MS Shell Dlg 2</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
                     </font>
                    </property>
                    <property name="styleSheet">
@@ -2034,8 +2142,11 @@ color:white;
                    </property>
                    <property name="font">
                     <font>
-                     <weight>75</weight>
-                     <bold>true</bold>
+                     <family>MS Shell Dlg 2</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
                     </font>
                    </property>
                    <property name="styleSheet">
@@ -2065,8 +2176,11 @@ color:white;
                    </property>
                    <property name="font">
                     <font>
-                     <weight>75</weight>
-                     <bold>true</bold>
+                     <family>MS Shell Dlg 2</family>
+                     <pointsize>9</pointsize>
+                     <weight>50</weight>
+                     <italic>false</italic>
+                     <bold>false</bold>
                     </font>
                    </property>
                    <property name="styleSheet">
@@ -2087,8 +2201,11 @@ color:white;
                <widget class="QLabel" name="label_54">
                 <property name="font">
                  <font>
-                  <weight>75</weight>
-                  <bold>true</bold>
+                  <family>MS Shell Dlg 2</family>
+                  <pointsize>9</pointsize>
+                  <weight>50</weight>
+                  <italic>false</italic>
+                  <bold>false</bold>
                  </font>
                 </property>
                 <property name="styleSheet">
@@ -2182,8 +2299,11 @@ color:white;</string>
                <widget class="QLabel" name="label_59">
                 <property name="font">
                  <font>
-                  <weight>75</weight>
-                  <bold>true</bold>
+                  <family>MS Shell Dlg 2</family>
+                  <pointsize>9</pointsize>
+                  <weight>50</weight>
+                  <italic>false</italic>
+                  <bold>false</bold>
                  </font>
                 </property>
                 <property name="styleSheet">
@@ -2320,7 +2440,7 @@ border : 2px solid #5A5D7A; </string>
 border : 2px solid #454674; </string>
                 </property>
                 <property name="text">
-                 <string>Hyprid Image</string>
+                 <string>Hybrid Image</string>
                 </property>
                </widget>
               </item>
