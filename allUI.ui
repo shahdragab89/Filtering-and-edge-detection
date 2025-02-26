@@ -188,7 +188,7 @@ color:white;
 </string>
                 </property>
                 <property name="text">
-                 <string>Upload</string>
+                 <string>Uplaod</string>
                 </property>
                </widget>
               </item>
@@ -1204,7 +1204,7 @@ color:white;
 </string>
                 </property>
                 <property name="text">
-                 <string>Upload</string>
+                 <string>Uplaod</string>
                 </property>
                </widget>
               </item>
@@ -2122,7 +2122,7 @@ color:white;
 </string>
                    </property>
                    <property name="text">
-                    <string>Upload Image1</string>
+                    <string>Uplaod Image1</string>
                    </property>
                   </widget>
                  </item>

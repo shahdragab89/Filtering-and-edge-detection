@@ -16,6 +16,10 @@ import traceback
 from edgedetectors import EdgeDetector
 from PyQt5.QtCore import QBuffer, QIODevice
 import PIL.ImageQt as ImageQtModule
+from histogram import Histogram
+from equalizehistogram import Equalize_Histogram
+from normalizehistogram import Normalize_Histogram
+
 
 # Manually patch QBuffer and QIODevice into ImageQt
 ImageQtModule.QBuffer = QBuffer
@@ -43,7 +47,7 @@ class MainApp(QtWidgets.QMainWindow, ui):
         self.upload_image1_button.clicked.connect(lambda: self.uploadImage(4))
         self.upload_image2_button.clicked.connect(lambda: self.uploadImage(5))
         self.rgbDownload_button.clicked.connect(self.downloadImage)
-        self.download_equalizer.clicked.connect(self.downloadImage)
+        #self.download_equalizer.clicked.connect(Equalize_Histogram.equalize_histogram)
         self.download_normalized.clicked.connect(self.downloadImage)
 
         self.apply_button.clicked.connect(self.apply)
@@ -66,6 +70,7 @@ class MainApp(QtWidgets.QMainWindow, ui):
         self.edges_comboBox.activated.connect(self.handleEdgeDetection)
 
 
+
     def uploadImage(self, value):
         options = QFileDialog.Options()
         file_path, _ = QFileDialog.getOpenFileName(self, "Open Image File", "", "Images (*.png *.xpm *.jpg *.jpeg *.bmp);;All Files (*)", options=options)
@@ -85,9 +90,14 @@ class MainApp(QtWidgets.QMainWindow, ui):
                     self.original_image.setPixmap(QPixmap.fromImage(q_image))
                     self.filtered_image.setPixmap(QPixmap.fromImage(q_image))  # If needed for filtering
                 case 2:
+
                     self.rgbOriginal_image.setPixmap(QPixmap.fromImage(q_image))
                 case 3:
                     self.histogramOriginal_image.setPixmap(QPixmap.fromImage(q_image))
+                    self.histogram = Histogram(self.image, self.label_51)
+                    self.equalizehistogram = Equalize_Histogram(self.image, self.label_53, self.equalized_image)
+                    self.normalizehistogram = Normalize_Histogram(self.image, self.label_55, self.normalized_image)              
+           
                 case 4:
                     self.image1.setPixmap(QPixmap.fromImage(q_image))
                 case 5:
