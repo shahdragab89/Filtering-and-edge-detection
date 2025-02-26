@@ -188,7 +188,7 @@ color:white;
 </string>
                 </property>
                 <property name="text">
-                 <string>Uplaod</string>
+                 <string>Upload</string>
                 </property>
                </widget>
               </item>
@@ -1099,7 +1099,7 @@ color:white;
 </string>
                 </property>
                 <property name="text">
-                 <string>Uplaod</string>
+                 <string>Upload</string>
                 </property>
                </widget>
               </item>
@@ -1479,7 +1479,7 @@ color:white;
 </string>
                 </property>
                 <property name="text">
-                 <string>Uplaod</string>
+                 <string>Upload</string>
                 </property>
                </widget>
               </item>
@@ -2014,7 +2014,7 @@ color:white;
 </string>
                    </property>
                    <property name="text">
-                    <string>Uplaod Image1</string>
+                    <string>Upload Image1</string>
                    </property>
                   </widget>
                  </item>
