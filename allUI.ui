@@ -2320,7 +2320,7 @@ border : 2px solid #5A5D7A; </string>
 border : 2px solid #454674; </string>
                 </property>
                 <property name="text">
-                 <string>Hyprid Image</string>
+                 <string>Hybrid Image</string>
                 </property>
                </widget>
               </item>

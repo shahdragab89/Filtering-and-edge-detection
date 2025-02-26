@@ -5,6 +5,14 @@ import numpy as np
 import scipy.signal as sig
 from PyQt5.QtGui import QPixmap, QImage
 from scipy.ndimage import convolve 
+from PyQt5.QtCore import QBuffer, QIODevice
+import PIL.ImageQt as ImageQtModule
+
+# Manually patch QBuffer and QIODevice into ImageQt
+ImageQtModule.QBuffer = QBuffer
+ImageQtModule.QIODevice = QIODevice
+
+
 
 class FilterProcessor:
     @staticmethod
