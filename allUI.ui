@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1407</width>
-    <height>814</height>
+    <height>898</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -59,7 +59,7 @@ QTabWidget::pane {
 </string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -1247,6 +1247,18 @@ color:white;
         </item>
         <item row="1" column="0">
          <widget class="QFrame" name="frame_2">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>900</width>
+            <height>400</height>
+           </size>
+          </property>
           <property name="styleSheet">
            <string notr="true">background-color:#454674;
 border-radius:8px;
@@ -1298,6 +1310,18 @@ border : 2px solid #454674; </string>
         </item>
         <item row="1" column="1">
          <widget class="QFrame" name="frame_3">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>900</width>
+            <height>400</height>
+           </size>
+          </property>
           <property name="styleSheet">
            <string notr="true">background-color:#454674;
 border-radius:8px;
@@ -1349,6 +1373,18 @@ border : 2px solid #454674; </string>
         </item>
         <item row="2" column="0">
          <widget class="QFrame" name="frame_4">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>900</width>
+            <height>400</height>
+           </size>
+          </property>
           <property name="styleSheet">
            <string notr="true">background-color:#454674;
 border-radius:8px;
@@ -1400,6 +1436,12 @@ border : 2px solid #454674; </string>
         </item>
         <item row="2" column="1">
          <widget class="QFrame" name="frame_5">
+          <property name="maximumSize">
+           <size>
+            <width>900</width>
+            <height>400</height>
+           </size>
+          </property>
           <property name="styleSheet">
            <string notr="true">background-color:#454674;
 border-radius:8px;
@@ -1667,6 +1709,18 @@ color:white;
           <layout class="QHBoxLayout" name="horizontalLayout_9">
            <item>
             <widget class="QFrame" name="frame_37">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>600</width>
+               <height>370</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true">background-color:#454674;
 border-radius:8px;
@@ -1719,6 +1773,18 @@ border : 2px solid #454674; </string>
            </item>
            <item>
             <widget class="QFrame" name="frame_38">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>600</width>
+               <height>370</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true">background-color:#454674;
 border-radius:8px;
@@ -1770,6 +1836,18 @@ border : 2px solid #454674; </string>
            </item>
            <item>
             <widget class="QFrame" name="frame_39">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>600</width>
+               <height>370</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true">background-color:#454674;
 border-radius:8px;
@@ -1833,6 +1911,18 @@ border : 2px solid #454674; </string>
           <layout class="QHBoxLayout" name="horizontalLayout_10">
            <item>
             <widget class="QFrame" name="frame_42">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>600</width>
+               <height>400</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true">background-color:#454674;
 border-radius:8px;
@@ -1860,6 +1950,18 @@ border : 2px solid #5A5D7A; </string>
            </item>
            <item>
             <widget class="QFrame" name="frame_43">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>600</width>
+               <height>370</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true">background-color:#454674;
 border-radius:8px;
@@ -1887,6 +1989,18 @@ border : 2px solid #5A5D7A; </string>
            </item>
            <item>
             <widget class="QFrame" name="frame_44">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>600</width>
+               <height>370</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true">background-color:#454674;
 border-radius:8px;
@@ -1933,6 +2047,18 @@ border : 2px solid #5A5D7A; </string>
           <layout class="QHBoxLayout" name="horizontalLayout_13">
            <item>
             <widget class="QFrame" name="frame_50">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>900</width>
+               <height>400</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true">background-color:#454674;
 border-radius:8px;
@@ -1984,6 +2110,18 @@ border : 2px solid #454674; </string>
            </item>
            <item>
             <widget class="QFrame" name="frame_51">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>900</width>
+               <height>400</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true">background-color:#454674;
 border-radius:8px;
@@ -2047,6 +2185,12 @@ border : 2px solid #454674; </string>
           <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="1,2">
            <item>
             <widget class="QFrame" name="frame_54">
+             <property name="maximumSize">
+              <size>
+               <width>400</width>
+               <height>16777215</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true">background-color:#454674;
 font: 9pt &quot;MS Shell Dlg 2&quot;;
@@ -2228,17 +2372,11 @@ border : 2px solid #454674; </string>
                 <property name="frameShadow">
                  <enum>QFrame::Raised</enum>
                 </property>
-                <widget class="QSlider" name="picture_slider">
-                 <property name="geometry">
-                  <rect>
-                   <x>10</x>
-                   <y>5</y>
-                   <width>211</width>
-                   <height>22</height>
-                  </rect>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">QSlider::groove:horizontal {
+                <layout class="QHBoxLayout" name="horizontalLayout_18">
+                 <item>
+                  <widget class="QSlider" name="picture_slider">
+                   <property name="styleSheet">
+                    <string notr="true">QSlider::groove:horizontal {
     border: 1px solid #999999;
     height: 2px;
 }
@@ -2264,35 +2402,37 @@ QSlider::handle:horizontal:hover {
     border-color: #007ad9;
 }
 </string>
-                 </property>
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                </widget>
-                <widget class="QLabel" name="picture_slider_value">
-                 <property name="geometry">
-                  <rect>
-                   <x>260</x>
-                   <y>0</y>
-                   <width>55</width>
-                   <height>30</height>
-                  </rect>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>30</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: #282554;
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="picture_slider_value">
+                   <property name="minimumSize">
+                    <size>
+                     <width>30</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>30</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: #282554;
 border-radius: 5px;
 color:white;</string>
-                 </property>
-                 <property name="text">
-                  <string>  value</string>
-                 </property>
-                </widget>
+                   </property>
+                   <property name="text">
+                    <string>  value</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </widget>
               </item>
               <item>
@@ -2326,17 +2466,11 @@ border : 2px solid #454674; </string>
                 <property name="frameShadow">
                  <enum>QFrame::Raised</enum>
                 </property>
-                <widget class="QSlider" name="picture_slider_2">
-                 <property name="geometry">
-                  <rect>
-                   <x>10</x>
-                   <y>5</y>
-                   <width>211</width>
-                   <height>22</height>
-                  </rect>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">QSlider::groove:horizontal {
+                <layout class="QHBoxLayout" name="horizontalLayout_19">
+                 <item>
+                  <widget class="QSlider" name="picture_slider_2">
+                   <property name="styleSheet">
+                    <string notr="true">QSlider::groove:horizontal {
     border: 1px solid #999999;
     height: 2px;
 }
@@ -2362,35 +2496,37 @@ QSlider::handle:horizontal:hover {
     border-color: #007ad9;
 }
 </string>
-                 </property>
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                </widget>
-                <widget class="QLabel" name="picture_slider_value_2">
-                 <property name="geometry">
-                  <rect>
-                   <x>260</x>
-                   <y>0</y>
-                   <width>55</width>
-                   <height>30</height>
-                  </rect>
-                 </property>
-                 <property name="minimumSize">
-                  <size>
-                   <width>0</width>
-                   <height>30</height>
-                  </size>
-                 </property>
-                 <property name="styleSheet">
-                  <string notr="true">background-color: #282554;
+                   </property>
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="picture_slider_value_2">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>30</width>
+                     <height>30</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">background-color: #282554;
 border-radius: 5px;
 color:white;</string>
-                 </property>
-                 <property name="text">
-                  <string>  value</string>
-                 </property>
-                </widget>
+                   </property>
+                   <property name="text">
+                    <string>  value</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </widget>
               </item>
              </layout>
@@ -2398,6 +2534,18 @@ color:white;</string>
            </item>
            <item>
             <widget class="QFrame" name="frame_55">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>900</width>
+               <height>400</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true">background-color:#454674;
 border-radius:8px;
