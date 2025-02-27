@@ -7,11 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1407</width>
-<<<<<<< HEAD
     <height>902</height>
-=======
-    <height>898</height>
->>>>>>> 992ce0c8fca70f869ef498fff77948865f593b3f
    </rect>
   </property>
   <property name="windowTitle">
@@ -63,11 +59,7 @@ QTabWidget::pane {
 </string>
       </property>
       <property name="currentIndex">
-<<<<<<< HEAD
-       <number>4</number>
-=======
        <number>0</number>
->>>>>>> 992ce0c8fca70f869ef498fff77948865f593b3f
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">

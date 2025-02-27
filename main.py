@@ -98,7 +98,11 @@ class MainApp(QtWidgets.QMainWindow, ui):
                     self.histogramOriginal_image.setPixmap(QPixmap.fromImage(q_image))
                     self.histogram = Histogram(self.image, self.label_51)
                     self.equalizehistogram = Equalize_Histogram(self.image, self.label_53, self.equalized_image)
-                    self.normalizehistogram = Normalize_Histogram(self.image, self.label_55, self.normalized_image)
+                    # self.normalizehistogram = Normalize_Histogram(self.image, self.label_55, self.normalized_image)
+                    # Initialize ImageNormalizer and normalize the image
+                    self.normalizehistogram = ImageNormalizer(self.normalized_image)
+                    self.normalizehistogram.set_image(q_image)
+                    self.normalizehistogram.normalize_image_and_display()
            
                 case 4:
                     self.image1.setPixmap(QPixmap.fromImage(q_image))
