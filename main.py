@@ -21,14 +21,11 @@ from thresholding import ImageThresholding
 from histogram import Histogram
 from equalizehistogram import Equalize_Histogram
 from normalizehistogram import Normalize_Histogram
-
+from frequencyfilters import FrequencyFilters
 
 # Manually patch QBuffer and QIODevice into ImageQt
 ImageQtModule.QBuffer = QBuffer
 ImageQtModule.QIODevice = QIODevice
-
-
-
 
 # Load the UI file
 ui, _ = loadUiType("allUi.ui")
@@ -71,7 +68,8 @@ class MainApp(QtWidgets.QMainWindow, ui):
         # Initialize the edge detection combobox
         self.edges_comboBox.activated.connect(self.handleEdgeDetection)
 
-
+        # connect the frequency filters 
+        FrequencyFilters.connect_ui_elements(self)
 
     def uploadImage(self, value):
         options = QFileDialog.Options()
