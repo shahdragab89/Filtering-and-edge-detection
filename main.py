@@ -18,6 +18,10 @@ from PyQt5.QtCore import QBuffer, QIODevice
 import PIL.ImageQt as ImageQtModule
 from normalization import ImageNormalizer
 from thresholding import ImageThresholding
+from histogram import Histogram
+from equalizehistogram import Equalize_Histogram
+from normalizehistogram import Normalize_Histogram
+
 
 # Manually patch QBuffer and QIODevice into ImageQt
 ImageQtModule.QBuffer = QBuffer
@@ -35,7 +39,8 @@ class MainApp(QtWidgets.QMainWindow, ui):
         self.setupUi(self)
 
         self.image = None
-
+        self.value = None
+        self.sigma_value = 0
         # Initializing Buttons 
         self.filterUpload_button.clicked.connect(lambda: self.uploadImage(1))
         self.filterDownload_button.clicked.connect(self.downloadImage)
@@ -46,8 +51,6 @@ class MainApp(QtWidgets.QMainWindow, ui):
         self.upload_image3_button.clicked.connect(lambda: self.uploadImage(6))
         self.thresholding = ImageThresholding(self.local_image, self.global_image)
         self.rgbDownload_button.clicked.connect(self.downloadImage)
-        self.download_equalizer.clicked.connect(self.downloadImage)
-        # self.download_normalized.clicked.connect(self.downloadImage)
 
         self.apply_button.clicked.connect(self.apply)
         self.reset_button.clicked.connect(lambda: self.reset(1))
@@ -68,13 +71,9 @@ class MainApp(QtWidgets.QMainWindow, ui):
         # Initialize the edge detection combobox
         self.edges_comboBox.activated.connect(self.handleEdgeDetection)
 
-        # Add threshold sliders for Canny
-        #self.threshold1_slider.sliderReleased.connect(self.handleEdgeDetection)
-        #self.threshold2_slider.sliderReleased.connect(self.handleEdgeDetection)
+
 
     def uploadImage(self, value):
-        # Value defines which label to show the picture on 
-        self.value = value
         options = QFileDialog.Options()
         file_path, _ = QFileDialog.getOpenFileName(self, "Open Image File", "", "Images (*.png *.xpm *.jpg *.jpeg *.bmp);;All Files (*)", options=options)
         
@@ -86,65 +85,75 @@ class MainApp(QtWidgets.QMainWindow, ui):
 
             q_image = QImage(self.image.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
 
-            self.original_image.setPixmap(QPixmap.fromImage(q_image))
-            self.original_image.setScaledContents(True)
+            self.value = value
+
             match value:
                 case 1:
-                    # Convert QImage to QPixmap and set it to the QLabel
                     self.original_image.setPixmap(QPixmap.fromImage(q_image))
-                    self.original_image.setScaledContents(True)  # Scale the image to fit QLabel
-                    self.filtered_image.setPixmap(QPixmap.fromImage(q_image))
-                    self.filtered_image.setScaledContents(True)  
+                    self.filtered_image.setPixmap(QPixmap.fromImage(q_image))  # If needed for filtering
                 case 2:
+
                     self.rgbOriginal_image.setPixmap(QPixmap.fromImage(q_image))
-                    self.rgbOriginal_image.setScaledContents(True)  
                 case 3:
                     self.histogramOriginal_image.setPixmap(QPixmap.fromImage(q_image))
-                    self.histogramOriginal_image.setScaledContents(True)
-
-                    # self.normalizer = ImageNormalizer(self.normalized_image)  # Provide QLabel for output
-                    # self.normalizer.set_image(q_image)
-                    # self.normalizer.normalize_image_and_display()
+                    self.histogram = Histogram(self.image, self.label_51)
+                    self.equalizehistogram = Equalize_Histogram(self.image, self.label_53, self.equalized_image)
+                    self.normalizehistogram = Normalize_Histogram(self.image, self.label_55, self.normalized_image)
+           
                 case 4:
                     self.image1.setPixmap(QPixmap.fromImage(q_image))
-                    self.image1.setScaledContents(True)  
                 case 5:
                     self.image2.setPixmap(QPixmap.fromImage(q_image))
-                    self.image2.setScaledContents(True)
                 case 6:
                     self.original_image_3.setPixmap(QPixmap.fromImage(q_image))
                     self.original_image_3.setScaledContents(True)   
 
                     # Store image & apply thresholding automatically
                     self.thresholding.set_image(q_image)
-                    self.thresholding.apply_thresholding()             
+                    self.thresholding.apply_thresholding() 
+
+            # Set scaled contents for each QLabel only once
+            self.original_image.setScaledContents(True)
+            self.filtered_image.setScaledContents(True)
+            self.rgbOriginal_image.setScaledContents(True)
+            self.histogramOriginal_image.setScaledContents(True)
+            self.image1.setScaledContents(True)
+            self.image2.setScaledContents(True)
+                            
         print("upload")
 
     def downloadImage(self):
+        if self.value is None:
+            print("No image uploaded yet. Please upload an image before downloading.")
+            return
+        
+        # Mapping value to QLabel attributes
+        image_mapping = {
+            1: self.original_image,
+            2: self.rgbOriginal_image,
+            3: self.histogramOriginal_image,
+            4: self.image1,
+            5: self.image2
+        }
+
+        label = image_mapping.get(self.value)
+
+        if not label or label.pixmap() is None:
+            print("No valid image found to download.")
+            return
+        
+        pixmap = label.pixmap()
+
+        # Open save dialog
         options = QFileDialog.Options()
         file_path, _ = QFileDialog.getSaveFileName(self, "Save Image", "", "Images (*.png *.jpg *.bmp *.jpeg)", options=options)
         
         if file_path:
-            match self.value:
-                case 1:
-                    pixmap = self.original_image.pixmap()
-                case 2:
-                    pixmap = self.rgbOriginal_image.pixmap()
-                case 3:
-                    pixmap = self.histogramOriginal_image.pixmap()
-                case 4:
-                    pixmap = self.image1.pixmap()
-                case 5:
-                    pixmap = self.image2.pixmap()
-                case _:
-                    print("No valid image found to download.")
-                    return
-
             if pixmap and not pixmap.isNull():
                 pixmap.save(file_path)
                 print(f"Image saved to {file_path}")
             else:
-                print("No image found in the selected QLabel.")
+                print("No valid image found in QLabel.")
 
     def handleNoise(self):
         try:
@@ -247,6 +256,7 @@ class MainApp(QtWidgets.QMainWindow, ui):
             # threshold2 = self.threshold2_slider.value()
             threshold1 = 50
             threshold2 = 150
+            sigma = self.sigma_value
             
             # Update threshold labels
             # self.threshold1_label.setText(str(threshold1))
@@ -273,9 +283,7 @@ class MainApp(QtWidgets.QMainWindow, ui):
             edge_image = EdgeDetector.apply_edge_detection(
                 input_array, 
                 method, 
-                threshold1, 
-                threshold2, 
-                aperture_size
+                sigma
             )
             
             if edge_image is None:
