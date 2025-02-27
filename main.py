@@ -22,6 +22,7 @@ from histogram import Histogram
 from equalizehistogram import Equalize_Histogram
 from normalizehistogram import Normalize_Histogram
 from frequencyfilters import FrequencyFilters
+from hybrid_image import HybridImageProcessor
 
 # Manually patch QBuffer and QIODevice into ImageQt
 ImageQtModule.QBuffer = QBuffer
@@ -38,6 +39,11 @@ class MainApp(QtWidgets.QMainWindow, ui):
         self.image = None
         self.value = None
         self.sigma_value = 0
+
+        self.image1_original = None  # Store original image1
+        self.image2_original = None  # Store original image2
+        self.hybrid_processor = HybridImageProcessor(self)
+
         # Initializing Buttons 
         self.filterUpload_button.clicked.connect(lambda: self.uploadImage(1))
         self.filterDownload_button.clicked.connect(self.downloadImage)
@@ -70,6 +76,10 @@ class MainApp(QtWidgets.QMainWindow, ui):
 
         # connect the frequency filters 
         FrequencyFilters.connect_ui_elements(self)
+        self.hybrid_processor = HybridImageProcessor(self)
+        # Connect Sliders
+        self.picture_slider.valueChanged.connect(self.hybrid_processor.update_images)
+        self.picture_slider_2.valueChanged.connect(self.hybrid_processor.update_images)
 
     def uploadImage(self, value):
         options = QFileDialog.Options()
@@ -103,9 +113,14 @@ class MainApp(QtWidgets.QMainWindow, ui):
                     self.normalizehistogram.normalize_image_and_display()
            
                 case 4:
-                    self.image1.setPixmap(QPixmap.fromImage(q_image))
+                    self.image1_original = self.image  # Store the original image for reference
+                    self.hybrid_processor.set_original_images(self.image1_original, self.image2_original)
+                    self.hybrid_processor.update_images()
+
                 case 5:
-                    self.image2.setPixmap(QPixmap.fromImage(q_image))
+                    self.image2_original = self.image  # Store the original image for reference
+                    self.hybrid_processor.set_original_images(self.image1_original, self.image2_original)
+                    self.hybrid_processor.update_images()
                 case 6:
                     self.original_image_3.setPixmap(QPixmap.fromImage(q_image))
                     self.original_image_3.setScaledContents(True)   
