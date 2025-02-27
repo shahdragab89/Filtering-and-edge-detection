@@ -47,8 +47,6 @@ class MainApp(QtWidgets.QMainWindow, ui):
         self.upload_image1_button.clicked.connect(lambda: self.uploadImage(4))
         self.upload_image2_button.clicked.connect(lambda: self.uploadImage(5))
         self.rgbDownload_button.clicked.connect(self.downloadImage)
-        #self.download_equalizer.clicked.connect(Equalize_Histogram.equalize_histogram)
-        self.download_normalized.clicked.connect(self.downloadImage)
 
         self.apply_button.clicked.connect(self.apply)
         self.reset_button.clicked.connect(lambda: self.reset(1))
@@ -274,9 +272,6 @@ class MainApp(QtWidgets.QMainWindow, ui):
             edge_image = EdgeDetector.apply_edge_detection(
                 input_array, 
                 method, 
-                threshold1, 
-                threshold2, 
-                aperture_size,
                 sigma
             )
             
