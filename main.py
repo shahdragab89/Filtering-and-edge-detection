@@ -16,6 +16,8 @@ import traceback
 from edgedetectors import EdgeDetector
 from PyQt5.QtCore import QBuffer, QIODevice
 import PIL.ImageQt as ImageQtModule
+from normalization import ImageNormalizer
+from thresholding import ImageThresholding
 
 # Manually patch QBuffer and QIODevice into ImageQt
 ImageQtModule.QBuffer = QBuffer
@@ -41,9 +43,11 @@ class MainApp(QtWidgets.QMainWindow, ui):
         self.upload_button_2.clicked.connect(lambda: self.uploadImage(3))
         self.upload_image1_button.clicked.connect(lambda: self.uploadImage(4))
         self.upload_image2_button.clicked.connect(lambda: self.uploadImage(5))
+        self.upload_image3_button.clicked.connect(lambda: self.uploadImage(6))
+        self.thresholding = ImageThresholding(self.local_image, self.global_image)
         self.rgbDownload_button.clicked.connect(self.downloadImage)
         self.download_equalizer.clicked.connect(self.downloadImage)
-        self.download_normalized.clicked.connect(self.downloadImage)
+        # self.download_normalized.clicked.connect(self.downloadImage)
 
         self.apply_button.clicked.connect(self.apply)
         self.reset_button.clicked.connect(lambda: self.reset(1))
@@ -96,13 +100,24 @@ class MainApp(QtWidgets.QMainWindow, ui):
                     self.rgbOriginal_image.setScaledContents(True)  
                 case 3:
                     self.histogramOriginal_image.setPixmap(QPixmap.fromImage(q_image))
-                    self.histogramOriginal_image.setScaledContents(True)  
+                    self.histogramOriginal_image.setScaledContents(True)
+
+                    # self.normalizer = ImageNormalizer(self.normalized_image)  # Provide QLabel for output
+                    # self.normalizer.set_image(q_image)
+                    # self.normalizer.normalize_image_and_display()
                 case 4:
                     self.image1.setPixmap(QPixmap.fromImage(q_image))
                     self.image1.setScaledContents(True)  
                 case 5:
                     self.image2.setPixmap(QPixmap.fromImage(q_image))
-                    self.image2.setScaledContents(True)                
+                    self.image2.setScaledContents(True)
+                case 6:
+                    self.original_image_3.setPixmap(QPixmap.fromImage(q_image))
+                    self.original_image_3.setScaledContents(True)   
+
+                    # Store image & apply thresholding automatically
+                    self.thresholding.set_image(q_image)
+                    self.thresholding.apply_thresholding()             
         print("upload")
 
     def downloadImage(self):
