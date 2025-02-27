@@ -150,9 +150,10 @@ class MainApp(QtWidgets.QMainWindow, ui):
             2: self.rgbOriginal_image,
             3: self.histogramOriginal_image,
             4: self.image1,
-            5: self.image2
+            5: self.image2,
+           
         }
-
+        
         label = image_mapping.get(self.value)
 
         if not label or label.pixmap() is None:
