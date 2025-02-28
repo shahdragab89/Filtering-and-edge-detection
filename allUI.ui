@@ -65,7 +65,7 @@ QTabWidget::pane {
 </string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -792,7 +792,7 @@ border : 2px solid #454674;
              </item>
              <item>
               <property name="text">
-               <string>Gaussian</string>
+               <string/>
               </property>
              </item>
             </widget>
@@ -1370,7 +1370,7 @@ border : 2px solid #5A5D7A; </string>
 border : 2px solid #454674; </string>
              </property>
              <property name="text">
-              <string>Gray Sacled Image</string>
+              <string>Gray Scaled Image</string>
              </property>
             </widget>
            </item>
@@ -2113,7 +2113,7 @@ border : 2px solid #5A5D7A; </string>
 border : 2px solid #454674; </string>
                 </property>
                 <property name="text">
-                 <string>Low Frequency Image</string>
+                 <string>High Frequency Image</string>
                 </property>
                </widget>
               </item>
@@ -2293,7 +2293,7 @@ border : 2px solid #5A5D7A; </string>
 border : 2px solid #454674; </string>
                 </property>
                 <property name="text">
-                 <string>High Frequency Image</string>
+                 <string>Low Frequency Image</string>
                 </property>
                </widget>
               </item>
@@ -2473,7 +2473,7 @@ border : 2px solid #454674; </string>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="download">
+               <widget class="QPushButton" name="hybriddownload_button">
                 <property name="minimumSize">
                  <size>
                   <width>130</width>

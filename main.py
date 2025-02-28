@@ -23,6 +23,7 @@ from equalizehistogram import Equalize_Histogram
 from normalizehistogram import Normalize_Histogram
 from frequencyfilters import FrequencyFilters
 from hybrid_image import HybridImageProcessor
+from grayscale import GrayscaleProcessor
 
 # Manually patch QBuffer and QIODevice into ImageQt
 ImageQtModule.QBuffer = QBuffer
@@ -44,6 +45,8 @@ class MainApp(QtWidgets.QMainWindow, ui):
         self.image2_original = None  # Store original image2
         self.hybrid_processor = HybridImageProcessor(self)
 
+        self.grayscale_processor = GrayscaleProcessor(self)
+
         # Initializing Buttons 
         self.filterUpload_button.clicked.connect(lambda: self.uploadImage(1))
         self.filterDownload_button.clicked.connect(self.downloadImage)
@@ -54,6 +57,7 @@ class MainApp(QtWidgets.QMainWindow, ui):
         self.upload_image3_button.clicked.connect(lambda: self.uploadImage(6))
         self.thresholding = ImageThresholding(self.local_image, self.global_image)
         self.rgbDownload_button.clicked.connect(self.downloadImage)
+        self.hybriddownload_button.clicked.connect(self.downloadImage)
 
         self.apply_button.clicked.connect(self.apply)
         self.reset_button.clicked.connect(lambda: self.reset(1))
@@ -86,23 +90,32 @@ class MainApp(QtWidgets.QMainWindow, ui):
         file_path, _ = QFileDialog.getOpenFileName(self, "Open Image File", "", "Images (*.png *.xpm *.jpg *.jpeg *.bmp);;All Files (*)", options=options)
         
         if file_path:
-            self.image = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
-            # Get the dimension of the image
-            height, width = self.image.shape
-            bytes_per_line = width
-
-            q_image = QImage(self.image.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
-
+           
             self.value = value
 
             match value:
                 case 1:
+                    self.image = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
+                    # Get the dimension of the image
+                    height, width = self.image.shape
+                    bytes_per_line = width
+
+                    q_image = QImage(self.image.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
+
                     self.original_image.setPixmap(QPixmap.fromImage(q_image))
                     self.filtered_image.setPixmap(QPixmap.fromImage(q_image))  # If needed for filtering
                 case 2:
-
-                    self.rgbOriginal_image.setPixmap(QPixmap.fromImage(q_image))
+                    self.grayscale_processor.load_image(file_path)  # Load colored image
+                    self.grayscale_processor.convert_to_grayscale()  # Convert to grayscale
+                    self.grayscale_processor.compute_histograms()  # Compute PDF & CDF
                 case 3:
+                    self.image = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
+                    # Get the dimension of the image
+                    height, width = self.image.shape
+                    bytes_per_line = width
+
+                    q_image = QImage(self.image.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
+
                     self.histogramOriginal_image.setPixmap(QPixmap.fromImage(q_image))
                     self.histogram = Histogram(self.image, self.label_51)
                     self.equalizehistogram = Equalize_Histogram(self.image, self.label_53, self.equalized_image)
@@ -113,15 +126,36 @@ class MainApp(QtWidgets.QMainWindow, ui):
                     self.normalizehistogram.normalize_image_and_display()
            
                 case 4:
+                    self.image = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
+                    # Get the dimension of the image
+                    height, width = self.image.shape
+                    bytes_per_line = width
+
+                    q_image = QImage(self.image.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
+
                     self.image1_original = self.image  # Store the original image for reference
                     self.hybrid_processor.set_original_images(self.image1_original, self.image2_original)
                     self.hybrid_processor.update_images()
 
                 case 5:
+                    self.image = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
+                    # Get the dimension of the image
+                    height, width = self.image.shape
+                    bytes_per_line = width
+
+                    q_image = QImage(self.image.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
+
                     self.image2_original = self.image  # Store the original image for reference
                     self.hybrid_processor.set_original_images(self.image1_original, self.image2_original)
                     self.hybrid_processor.update_images()
                 case 6:
+                    self.image = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
+                    # Get the dimension of the image
+                    height, width = self.image.shape
+                    bytes_per_line = width
+
+                    q_image = QImage(self.image.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
+
                     self.original_image_3.setPixmap(QPixmap.fromImage(q_image))
                     self.original_image_3.setScaledContents(True)   
 
@@ -146,12 +180,10 @@ class MainApp(QtWidgets.QMainWindow, ui):
         
         # Mapping value to QLabel attributes
         image_mapping = {
-            1: self.original_image,
-            2: self.rgbOriginal_image,
+            1: self.filtered_image,
+            2: self.rgbGray_image,
             3: self.histogramOriginal_image,
-            4: self.image1,
-            5: self.image2,
-           
+            4: self.hyprid_image
         }
         
         label = image_mapping.get(self.value)
