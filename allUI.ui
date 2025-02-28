@@ -2067,8 +2067,8 @@ border : 2px solid #5A5D7A; </string>
              </property>
              <property name="maximumSize">
               <size>
-               <width>900</width>
-               <height>400</height>
+               <width>600</width>
+               <height>900</height>
               </size>
              </property>
              <property name="styleSheet">
@@ -2247,8 +2247,8 @@ QSlider::handle:horizontal:hover {
              </property>
              <property name="maximumSize">
               <size>
-               <width>900</width>
-               <height>400</height>
+               <width>600</width>
+               <height>900</height>
               </size>
              </property>
              <property name="styleSheet">
@@ -2422,8 +2422,8 @@ QSlider::handle:horizontal:hover {
              </property>
              <property name="maximumSize">
               <size>
-               <width>900</width>
-               <height>400</height>
+               <width>600</width>
+               <height>900</height>
               </size>
              </property>
              <property name="styleSheet">
