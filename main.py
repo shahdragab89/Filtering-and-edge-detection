@@ -116,13 +116,16 @@ class MainApp(QtWidgets.QMainWindow, ui):
            
                 case 4:
                     q_image, self.image1_original = self.process_and_store_grayscale(file_path)
-
+                    self.image1.setPixmap(QPixmap.fromImage(q_image))
+                    self.image1.setScaledContents(True)
                     # Update Hybrid Processor
                     self.hybrid_processor.set_original_images(self.image1_original, self.image2_original)
                     self.hybrid_processor.update_images()
 
                 case 5:
                     q_image, self.image2_original = self.process_and_store_grayscale(file_path)
+                    self.image2.setPixmap(QPixmap.fromImage(q_image))
+                    self.image2.setScaledContents(True)
                     # Update Hybrid Processor
                     self.hybrid_processor.set_original_images(self.image1_original, self.image2_original)
                     self.hybrid_processor.update_images()
