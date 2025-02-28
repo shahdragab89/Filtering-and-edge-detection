@@ -95,27 +95,16 @@ class MainApp(QtWidgets.QMainWindow, ui):
 
             match value:
                 case 1:
-                    self.image = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
-                    # Get the dimension of the image
-                    height, width = self.image.shape
-                    bytes_per_line = width
-
-                    q_image = QImage(self.image.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
-
+                    q_image, self.image = self.process_and_store_grayscale(file_path)  # Get QImage & NumPy array
                     self.original_image.setPixmap(QPixmap.fromImage(q_image))
-                    self.filtered_image.setPixmap(QPixmap.fromImage(q_image))  # If needed for filtering
+                    self.filtered_image.setPixmap(QPixmap.fromImage(q_image))
+
                 case 2:
                     self.grayscale_processor.load_image(file_path)  # Load colored image
                     self.grayscale_processor.convert_to_grayscale()  # Convert to grayscale
                     self.grayscale_processor.compute_histograms()  # Compute PDF & CDF
                 case 3:
-                    self.image = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
-                    # Get the dimension of the image
-                    height, width = self.image.shape
-                    bytes_per_line = width
-
-                    q_image = QImage(self.image.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
-
+                    q_image, self.image = self.process_and_store_grayscale(file_path)
                     self.histogramOriginal_image.setPixmap(QPixmap.fromImage(q_image))
                     self.histogram = Histogram(self.image, self.label_51)
                     self.equalizehistogram = Equalize_Histogram(self.image, self.label_53, self.equalized_image)
@@ -126,38 +115,20 @@ class MainApp(QtWidgets.QMainWindow, ui):
                     self.normalizehistogram.normalize_image_and_display()
            
                 case 4:
-                    self.image = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
-                    # Get the dimension of the image
-                    height, width = self.image.shape
-                    bytes_per_line = width
+                    q_image, self.image1_original = self.process_and_store_grayscale(file_path)
 
-                    q_image = QImage(self.image.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
-
-                    self.image1_original = self.image  # Store the original image for reference
+                    # Update Hybrid Processor
                     self.hybrid_processor.set_original_images(self.image1_original, self.image2_original)
                     self.hybrid_processor.update_images()
 
                 case 5:
-                    self.image = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
-                    # Get the dimension of the image
-                    height, width = self.image.shape
-                    bytes_per_line = width
-
-                    q_image = QImage(self.image.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
-
-                    self.image2_original = self.image  # Store the original image for reference
+                    q_image, self.image2_original = self.process_and_store_grayscale(file_path)
+                    # Update Hybrid Processor
                     self.hybrid_processor.set_original_images(self.image1_original, self.image2_original)
                     self.hybrid_processor.update_images()
                 case 6:
-                    self.image = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE)
-                    # Get the dimension of the image
-                    height, width = self.image.shape
-                    bytes_per_line = width
-
-                    q_image = QImage(self.image.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
-
+                    q_image, self.image = self.process_and_store_grayscale(file_path)
                     self.original_image_3.setPixmap(QPixmap.fromImage(q_image))
-                    self.original_image_3.setScaledContents(True)   
 
                     # Store image & apply thresholding automatically
                     self.thresholding.set_image(q_image)
@@ -170,6 +141,8 @@ class MainApp(QtWidgets.QMainWindow, ui):
             self.histogramOriginal_image.setScaledContents(True)
             self.image1.setScaledContents(True)
             self.image2.setScaledContents(True)
+            self.original_image_3.setScaledContents(True)   
+
                             
         print("upload")
 
@@ -353,6 +326,30 @@ class MainApp(QtWidgets.QMainWindow, ui):
         except Exception as e:
             print("Unexpected error in edge detection:")
             traceback.print_exc()  # This prints the full error traceback
+
+    def process_and_store_grayscale(self, file_path):
+        """
+        Loads an RGB image, converts it to grayscale without modifying the grayscale widget UI, 
+        and returns the grayscale QImage & NumPy array.
+        """
+        # Load the image directly (WITHOUT affecting UI)
+        original_image = Image.open(file_path).convert("RGB")
+        img_array = np.array(original_image)
+
+        # Convert to grayscale using standard formula
+        grayscale_values = (
+            0.299 * img_array[:, :, 0] +
+            0.587 * img_array[:, :, 1] +
+            0.114 * img_array[:, :, 2]
+        )
+        grayscale_array = grayscale_values.astype(np.uint8)
+
+        # Convert NumPy grayscale array to QImage
+        height, width = grayscale_array.shape
+        bytes_per_line = width
+        q_image = QImage(grayscale_array.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
+
+        return q_image, grayscale_array  # Return both QImage and NumPy array
 
 
 if __name__ == "__main__":

@@ -114,3 +114,5 @@ class GrayscaleProcessor:
         data = pil_image.tobytes("raw", "RGBA")
         q_image = QImage(data, pil_image.width, pil_image.height, QImage.Format_RGBA8888)
         return q_image
+
+    
