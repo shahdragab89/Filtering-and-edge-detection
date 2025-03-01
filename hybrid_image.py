@@ -35,50 +35,6 @@ class HybridImageProcessor:
         scale_factors = (target_shape[0] / image.shape[0], target_shape[1] / image.shape[1])
         return zoom(image, scale_factors, order=1)  # Bilinear interpolation
     
-    # def update_images(self):
-    #     """
-    #     Updates the filtered versions of image1 and image2 and combines them into the hybrid image.
-    #     """
-    #     if self.original_image1 is None or self.original_image2 is None:
-    #         return
-        
-    #     # Ensure both images have the same shape
-    #     target_shape = (min(self.original_image1.shape[0], self.original_image2.shape[0]),
-    #                     min(self.original_image1.shape[1], self.original_image2.shape[1]))
-    #     image1 = self.resize_image(self.original_image1, target_shape)
-    #     image2 = self.resize_image(self.original_image2, target_shape)
-        
-    #     radius1 = self.ui.picture_slider.value()
-    #     radius2 = self.ui.picture_slider_2.value()
-        
-    #     # Apply frequency filters
-    #     filtered_image1 = FrequencyFilters.ideal_low_pass_filter(image1, radius1)
-    #     filtered_image2 = FrequencyFilters.ideal_high_pass_filter(image2, radius2)
-        
-    #     # Ensure images have the same shape before combining
-    #     target_shape_filtered = (min(filtered_image1.shape[0], filtered_image2.shape[0]),
-    #                              min(filtered_image1.shape[1], filtered_image2.shape[1]))
-    #     filtered_image1 = self.resize_image(filtered_image1, target_shape_filtered)
-    #     filtered_image2 = self.resize_image(filtered_image2, target_shape_filtered)
-        
-    #     # Convert filtered images to QImage and display
-    #     filtered_qimage1 = FrequencyFilters.convert_to_qimage(filtered_image1)
-    #     filtered_qimage2 = FrequencyFilters.convert_to_qimage(filtered_image2)
-        
-    #     self.ui.image1.setPixmap(QPixmap.fromImage(filtered_qimage1))
-    #     self.ui.image1.setScaledContents(True)
-    #     self.ui.image2.setPixmap(QPixmap.fromImage(filtered_qimage2))
-    #     self.ui.image2.setScaledContents(True)
-        
-    #     # Combine images element-wise
-    #     hybrid_image = np.clip(filtered_image1.astype(np.float32) + filtered_image2.astype(np.float32), 0, 255).astype(np.uint8)
-        
-    #     # Convert to QImage and display hybrid image
-    #     hybrid_qimage = FrequencyFilters.convert_to_qimage(hybrid_image)
-    #     self.ui.hyprid_image.setPixmap(QPixmap.fromImage(hybrid_qimage))
-    #     self.ui.hyprid_image.setScaledContents(True)
-        
-    #     print("Filtered images and hybrid image updated")
     def update_images(self):
         """
         Updates the filtered versions of image1 and image2 and combines them into the hybrid image.
