@@ -331,11 +331,7 @@ class MainApp(QtWidgets.QMainWindow, ui):
             traceback.print_exc()  # This prints the full error traceback
 
     def process_and_store_grayscale(self, file_path):
-        """
-        Loads an RGB image, converts it to grayscale without modifying the grayscale widget UI, 
-        and returns the grayscale QImage & NumPy array.
-        """
-        # Load the image directly (WITHOUT affecting UI)
+       
         original_image = Image.open(file_path).convert("RGB")
         img_array = np.array(original_image)
 
@@ -352,7 +348,7 @@ class MainApp(QtWidgets.QMainWindow, ui):
         bytes_per_line = width
         q_image = QImage(grayscale_array.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
 
-        return q_image, grayscale_array  # Return both QImage and NumPy array
+        return q_image, grayscale_array 
 
 
 if __name__ == "__main__":
