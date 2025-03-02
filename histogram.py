@@ -6,33 +6,17 @@ from PyQt5.QtWidgets import QLabel
 from io import BytesIO
 
 def calc_hist(images, channels, mask, histSize, ranges):
-    """
-    Custom implementation of histogram calculation without using cv2.calcHist
-    
-    Parameters:
-    images: List containing input image(s)
-    channels: List of channels for which to compute histogram 
-    mask: Optional mask
-    histSize: List containing number of bins
-    ranges: List containing min and max value for histogram
-    
-    Returns:
-    hist: Computed histogram as numpy array
-    """
-    # Extract the image from the list (like cv2.calcHist expects)
     image = images[0]
-    
-    # Extract parameters
     bins = histSize[0]
     min_val, max_val = ranges
     
-    # Initialize histogram with zeros
+    #initialize histogram with zeros
     hist = np.zeros(bins, dtype=np.float32)
     
-    # Calculate bin width
+    #calculate bin width
     bin_width = (max_val - min_val) / bins
     
-    # Flatten the image if it's not already 1D
+    #flatten the image to 1D
     if len(image.shape) > 2:
         # If it's a color image, use the specified channel
         channel = channels[0]
@@ -43,23 +27,18 @@ def calc_hist(images, channels, mask, histSize, ranges):
         # It's a grayscale image
         flat_image = image.flatten()
     
-    # Apply mask if provided
+    #apply mask
     if mask is not None:
         flat_mask = mask.flatten()
         flat_image = flat_image[flat_mask != 0]
     
-    # Count pixels in each bin
     for pixel_value in flat_image:
-        # Calculate bin index
+        #calculate bin index
         bin_idx = int((pixel_value - min_val) / bin_width)
-        
-        # Ensure the index is within range
+        #ensure idx is within range
         if 0 <= bin_idx < bins:
             hist[bin_idx] += 1
-    
-    # Reshape to match cv2.calcHist output format
     hist = hist.reshape(-1, 1)
-    
     return hist
 
 class Histogram:
@@ -81,7 +60,6 @@ class Histogram:
             print("No valid image loaded for histogram computation.")
             return
         
-        # Use our custom calc_hist function instead of cv2.calcHist
         hist = calc_hist([self.image], [0], None, [256], [0, 256])
             
         plt.figure(figsize=(4, 3), dpi=100)
@@ -108,8 +86,6 @@ class Histogram:
             print("No valid image loaded for CDF computation.")
             return
         plt.figure(figsize=(8, 6))
-        
-        # Use our custom calc_hist function instead of cv2.calcHist
         hist = calc_hist([self.image], [0], None, [256], [0, 256])
         
         pdf = hist / hist.sum()
