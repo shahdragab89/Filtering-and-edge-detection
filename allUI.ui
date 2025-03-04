@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Filtering and Edge Detection</string>
   </property>
   <property name="styleSheet">
    <string notr="true">background-color:#212639;</string>
@@ -1636,68 +1636,6 @@ color:white;
                 </property>
                </widget>
               </item>
-              <item>
-               <widget class="QPushButton" name="download_equalizer">
-                <property name="minimumSize">
-                 <size>
-                  <width>140</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-color: #DE3E62;
-border-radius: 5px;
-color:white;
-</string>
-                </property>
-                <property name="text">
-                 <string>Download Equalized</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="download_normalized">
-                <property name="minimumSize">
-                 <size>
-                  <width>140</width>
-                  <height>28</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="font">
-                 <font>
-                  <weight>75</weight>
-                  <bold>true</bold>
-                 </font>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">background-color: #DE3E62;
-border-radius: 5px;
-color:white;
-</string>
-                </property>
-                <property name="text">
-                 <string>Download Normalized</string>
-                </property>
-               </widget>
-              </item>
              </layout>
             </widget>
            </item>
@@ -2518,7 +2456,7 @@ border : 2px solid #5A5D7A;
       </widget>
       <widget class="QWidget" name="tab_5">
        <attribute name="title">
-        <string>thresholding</string>
+        <string>Thresholding</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>

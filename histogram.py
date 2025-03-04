@@ -1,4 +1,3 @@
-import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 from PyQt5.QtGui import QPixmap, QImage
@@ -6,7 +5,7 @@ from PyQt5.QtWidgets import QLabel
 from io import BytesIO
 
 def calc_hist(images, channels, mask, histSize, ranges):
-    image = images[0]
+    image = images[0] #select first image of the list
     bins = histSize[0]
     min_val, max_val = ranges
     
@@ -26,11 +25,6 @@ def calc_hist(images, channels, mask, histSize, ranges):
     else:
         # It's a grayscale image
         flat_image = image.flatten()
-    
-    #apply mask
-    if mask is not None:
-        flat_mask = mask.flatten()
-        flat_image = flat_image[flat_mask != 0]
     
     for pixel_value in flat_image:
         #calculate bin index

@@ -1,28 +1,47 @@
-import cv2
 import numpy as np
 from PyQt5.QtGui import QImage
 from scipy.ndimage import gaussian_filter
 
-
 class EdgeDetector:
-    
     @staticmethod
-    def apply_edge_detection(image, method, sigma = 1):
+    def apply_kernel(image, kernel):
+        #get dimensions of image, kernel 
+        image_h, image_w = image.shape
+        kernel_h, kernel_w = kernel.shape
+        
+        #padding calc
+        pad_h = kernel_h // 2
+        pad_w = kernel_w // 2
+        
+        #applying padding
+        padded_image = np.pad(image, ((pad_h, pad_h), (pad_w, pad_w)), mode='constant')
+        
+        #initialize result by zero array
+        result = np.zeros_like(image, dtype=np.float32)
+        
+        #CONVOLUTION!!!
+        for y in range(image_h):
+            for x in range(image_w):
+                local_region = padded_image[y:y+kernel_h, x:x+kernel_w]
+                result[y, x] = np.sum(local_region * kernel)        
+        return result
+
+    @staticmethod
+    def apply_edge_detection(image, method, sigma=1):
         if image is None:
             raise ValueError("No image provided for edge detection")
         
         if not isinstance(image, np.ndarray):
             raise TypeError("Expected an image as a NumPy array")
         
-        # convert image to grayscale ((if not already))
+        #convert img to grayscale 
         if len(image.shape) == 3 and image.shape[2] == 3:
-            img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+            img = np.dot(image[...,:3], [0.2989, 0.5870, 0.1140])
         else:
             img = image.copy()
         
-        # normalize to 0-255 if needed
-        if img.dtype != np.uint8:
-            img = cv2.normalize(img, None, 0, 255, cv2.NORM_MINMAX, dtype=cv2.CV_8U)
+        #normalize to 0-255 
+        img = ((img - img.min()) / (img.max() - img.min()) * 255).astype(np.uint8)
             
         result = None
         
@@ -37,7 +56,6 @@ class EdgeDetector:
         else:
             raise ValueError(f"Unknown edge detection method: {method}")
         
-        # conversion to QImage 
         height, width = result.shape
         bytes_per_line = width
         return QImage(result.data, width, height, bytes_per_line, QImage.Format_Grayscale8)
@@ -47,54 +65,54 @@ class EdgeDetector:
         kernel_x = np.array([[-1, 0, 1], [-1, 0, 1], [-1, 0, 1]], dtype=np.float32)
         kernel_y = np.array([[-1, -1, -1], [0, 0, 0], [1, 1, 1]], dtype=np.float32)
         
-        grad_x = cv2.filter2D(image, cv2.CV_32F, kernel_x)
-        grad_y = cv2.filter2D(image, cv2.CV_32F, kernel_y)
+        grad_x = EdgeDetector.apply_kernel(image, kernel_x)
+        grad_y = EdgeDetector.apply_kernel(image, kernel_y)
         
-        magnitude = cv2.magnitude(grad_x, grad_y)
-        magnitude = cv2.normalize(magnitude, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
-        return magnitude
+        magnitude = np.sqrt(grad_x**2 + grad_y**2)
+        magnitude = (magnitude - magnitude.min()) / (magnitude.max() - magnitude.min()) * 255
+        return magnitude.astype(np.uint8)
 
     @staticmethod
     def roberts(image):
         kernel_x = np.array([[1, 0], [0, -1]], dtype=np.float32)
         kernel_y = np.array([[0, 1], [-1, 0]], dtype=np.float32)
         
-        grad_x = cv2.filter2D(image, cv2.CV_32F, kernel_x)
-        grad_y = cv2.filter2D(image, cv2.CV_32F, kernel_y)
+        grad_x = EdgeDetector.apply_kernel(image, kernel_x)
+        grad_y = EdgeDetector.apply_kernel(image, kernel_y)
         
-        magnitude = cv2.magnitude(grad_x, grad_y)
-        magnitude = cv2.normalize(magnitude, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
-        return magnitude
+        magnitude = np.sqrt(grad_x**2 + grad_y**2)
+        magnitude = (magnitude - magnitude.min()) / (magnitude.max() - magnitude.min()) * 255
+        return magnitude.astype(np.uint8)
 
     @staticmethod
     def sobel(image):
         kernel_x = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]], dtype=np.float32)
         kernel_y = np.array([[-1, -2, -1], [0, 0, 0], [1, 2, 1]], dtype=np.float32)
 
-        grad_x = cv2.filter2D(image, cv2.CV_32F, kernel_x)
-        grad_y = cv2.filter2D(image, cv2.CV_32F, kernel_y)
+        grad_x = EdgeDetector.apply_kernel(image, kernel_x)
+        grad_y = EdgeDetector.apply_kernel(image, kernel_y)
 
-        magnitude = cv2.magnitude(grad_x, grad_y)
-        magnitude = cv2.normalize(magnitude, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
-        return magnitude
+        magnitude = np.sqrt(grad_x**2 + grad_y**2)
+        magnitude = (magnitude - magnitude.min()) / (magnitude.max() - magnitude.min()) * 255
+        return magnitude.astype(np.uint8)
 
     @staticmethod
     def canny(image, sigma):
-        #1st step: gaussian blur 
+        # 1st step: gaussian blur
         smoothed = gaussian_filter(image, sigma=sigma)
         
-        #2nd step: grad mag & direction
+        # 2nd step: grad mag & direction
         sobel_x = np.array([[-1, 0, 1], [-2, 0, 2], [-1, 0, 1]], dtype=np.float32)
         sobel_y = np.array([[-1, -2, -1], [0, 0, 0], [1, 2, 1]], dtype=np.float32)
 
-        grad_x = cv2.filter2D(smoothed, cv2.CV_32F, sobel_x)
-        grad_y = cv2.filter2D(smoothed, cv2.CV_32F, sobel_y)
+        grad_x = EdgeDetector.apply_kernel(smoothed, sobel_x)
+        grad_y = EdgeDetector.apply_kernel(smoothed, sobel_y)
 
         magnitude = np.hypot(grad_x, grad_y)
         magnitude = (magnitude / magnitude.max()) * 255 
         direction = np.arctan2(grad_y, grad_x) 
         
-        #3rd step: non-max supression
+        # 3rd step: non-max suppression
         nms = np.zeros_like(magnitude, dtype=np.uint8)
         angle = direction * (180 / np.pi)  
         angle[angle < 0] += 180  
@@ -119,7 +137,7 @@ class EdgeDetector:
                 else:
                     nms[i, j] = 0
         
-        #4th step: hysterisis thresholding 
+        # 4th step: hysteresis thresholding 
         high_thresh = np.max(nms) * 0.2 * (1 + sigma / 10)
         low_thresh = high_thresh * 0.5
         
