@@ -24,6 +24,7 @@ from normalizehistogram import Normalize_Histogram
 from frequencyfilters import FrequencyFilters
 from hybrid_image import HybridImageProcessor
 from grayscale import GrayscaleProcessor
+from plot_cdf import Plot_CDF
 
 # Manually patch QBuffer and QIODevice into ImageQt
 ImageQtModule.QBuffer = QBuffer
@@ -108,11 +109,10 @@ class MainApp(QtWidgets.QMainWindow, ui):
                     self.histogramOriginal_image.setPixmap(QPixmap.fromImage(q_image))
                     self.histogram = Histogram(self.image, self.label_51)
                     self.equalizehistogram = Equalize_Histogram(self.image, self.label_53, self.equalized_image)
-                    # self.normalizehistogram = Normalize_Histogram(self.image, self.label_55, self.normalized_image)
-                    # Initialize ImageNormalizer and normalize the image
                     self.normalizehistogram = ImageNormalizer(self.normalized_image)
                     self.normalizehistogram.set_image(q_image)
                     self.normalizehistogram.normalize_image_and_display()
+                    self.plot_cdf = Plot_CDF(self.image, self.label_55)  
            
                 case 4:
                     q_image, self.image1_original = self.process_and_store_grayscale(file_path)

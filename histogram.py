@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtWidgets import QLabel
+from PyQt5 import Qt
 from io import BytesIO
 
 def calc_hist(images, channels, mask, histSize, ranges):
@@ -45,9 +46,6 @@ class Histogram:
         self.image = image 
         self.label = label  
         self.plot_histogram()
-        
-        #show CDF in a separate window
-        self.plot_cdf_popup()
 
     def plot_histogram(self):
         if self.image is None:
@@ -74,21 +72,3 @@ class Histogram:
         pixmap = QPixmap.fromImage(image)
         self.label.setPixmap(pixmap)
         self.label.setScaledContents(True)
-    
-    def plot_cdf_popup(self):
-        if self.image is None:
-            print("No valid image loaded for CDF computation.")
-            return
-        plt.figure(figsize=(8, 6))
-        hist = calc_hist([self.image], [0], None, [256], [0, 256])
-        
-        pdf = hist / hist.sum()
-        cdf = np.cumsum(pdf)
-        plt.plot(cdf, color='black')
-        plt.title("Grayscale CDF Distribution")
-        plt.xlabel("Pixel Value")
-        plt.ylabel("Cumulative Probability")
-        plt.xlim([0, 256])
-        plt.ylim([0, 1.05])
-        plt.grid()
-        plt.show(block=False)
