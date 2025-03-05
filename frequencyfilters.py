@@ -63,7 +63,7 @@ class FrequencyFilters:
 
     @staticmethod
     def convert_to_qimage(image):
-        image = np.clip(image, 0, 255).astype(np.uint8)  # Ensure the image is uint8
+        image = np.clip(image, 0, 255).astype(np.uint8) 
         height, width = image.shape
         bytes_per_line = width
         return QImage(image.data.tobytes(), width, height, bytes_per_line, QImage.Format_Grayscale8)

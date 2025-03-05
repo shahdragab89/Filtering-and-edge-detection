@@ -39,12 +39,12 @@ class FilterProcessor:
     @staticmethod
     def gaussian_filter(image, kernel_size=3, sigma=1):
         try:
-            # Make sure mask_size is odd
+            # Make sure kernel_size is odd
             if kernel_size % 2 == 0:
                 raise ValueError("mask_size must be an odd number.")
 
             # Create Gaussian kernel
-            k = kernel_size // 2  # Kernel radius
+            k = kernel_size // 2  
             x, y = np.mgrid[-k:k+1, -k:k+1]
 
             # Applying Gaussian function to the kernel and normalizing the kernel

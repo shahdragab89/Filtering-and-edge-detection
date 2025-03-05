@@ -65,7 +65,7 @@ QTabWidget::pane {
 </string>
       </property>
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -2470,6 +2470,12 @@ border : 2px solid #5A5D7A;
           <layout class="QHBoxLayout" name="horizontalLayout_36" stretch="1,1,1">
            <item>
             <widget class="QFrame" name="frame_87">
+             <property name="maximumSize">
+              <size>
+               <width>600</width>
+               <height>900</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true">background-color:#454674;
 border-radius:8px;
@@ -2604,6 +2610,12 @@ border : 2px solid #454674; </string>
            </item>
            <item>
             <widget class="QFrame" name="frame_81">
+             <property name="maximumSize">
+              <size>
+               <width>600</width>
+               <height>900</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true">background-color:#454674;
 border-radius:8px;
@@ -2655,6 +2667,12 @@ border : 2px solid #454674; </string>
            </item>
            <item>
             <widget class="QFrame" name="frame_80">
+             <property name="maximumSize">
+              <size>
+               <width>600</width>
+               <height>900</height>
+              </size>
+             </property>
              <property name="styleSheet">
               <string notr="true">background-color:#454674;
 border-radius:8px;

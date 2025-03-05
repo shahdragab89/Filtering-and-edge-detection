@@ -63,7 +63,7 @@ class Equalize_Histogram:
         plt.xlabel("Pixel Value")
         plt.ylabel("Frequency")
         plt.xlim([0, 256])
-        plt.ylim([0, 5000])  
+        plt.ylim([0, 25000])  
         plt.grid()
         buffer = BytesIO()
         plt.savefig(buffer, format="png", bbox_inches='tight')

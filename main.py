@@ -26,11 +26,9 @@ from hybrid_image import HybridImageProcessor
 from grayscale import GrayscaleProcessor
 from plot_cdf import Plot_CDF
 
-# Manually patch QBuffer and QIODevice into ImageQt
 ImageQtModule.QBuffer = QBuffer
 ImageQtModule.QIODevice = QIODevice
 
-# Load the UI file
 ui, _ = loadUiType("allUi.ui")
 
 class MainApp(QtWidgets.QMainWindow, ui):
@@ -48,7 +46,6 @@ class MainApp(QtWidgets.QMainWindow, ui):
 
         self.grayscale_processor = GrayscaleProcessor(self)
 
-        # Initializing Buttons 
         self.filterUpload_button.clicked.connect(lambda: self.uploadImage(1))
         self.filterDownload_button.clicked.connect(self.downloadImage)
         self.rgbUpload_button.clicked.connect(lambda: self.uploadImage(2))
@@ -63,7 +60,6 @@ class MainApp(QtWidgets.QMainWindow, ui):
         self.apply_button.clicked.connect(self.apply)
         self.reset_button.clicked.connect(lambda: self.reset(1))
 
-        # Initializing ComboBoxes
         self.noise_comboBox.activated.connect(self.handleNoise)
         self.filter_comboBox.activated.connect(self.handleFilter)
 
@@ -277,16 +273,10 @@ class MainApp(QtWidgets.QMainWindow, ui):
                     self.filtered_image.setPixmap(QPixmap.fromImage(q_image))
                 return
 
-            # Get threshold values for Canny (used only for Canny method)
-            # threshold1 = self.threshold1_slider.value()
-            # threshold2 = self.threshold2_slider.value()
             threshold1 = 50
             threshold2 = 150
             sigma = self.sigma_value
-            
-            # Update threshold labels
-            # self.threshold1_label.setText(str(threshold1))
-            # self.threshold2_label.setText(str(threshold2))
+
             
             # Get kernel size for Sobel and Canny
             kernel_values = [1, 3, 5, 7]
